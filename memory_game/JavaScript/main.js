@@ -20,6 +20,7 @@ var cards = [
  cardImage:	"images/king-of-diamonds.png"
 }
 ]; 
+
 var cardsInPlay = []; 
 
 //checking for a match if cardsInPlay
@@ -32,18 +33,32 @@ var checkForMatch = function(){
 }
 
 // logic when users flips a card to add 
-var flipCard = function(cardId){
-	console.log("User flipped " + cards[cardId].rank)
-	console.log("User flipped " + cards[cardId].suit)
-	console.log("User flipped " + cards[cardId].cardImage)
+var flipCard = function(){
+	var cardId = this.getAttribute("data-id")
 	cardsInPlay.push(cards[cardId].rank);
+	this.setAttribute("src", cards[cardId].cardImage)
 	//logic to check if 2 cads have been played 
 	if (cardsInPlay.length === 2){
+	// call checkForMatch if 2 cards are flipped
 	    checkForMatch();
 	}else {
-		alert("Sorry no match try again!");
+		alert("Please select 2 cards");
 		}
 }
 
-flipCard(0);
-flipCard(2);
+// logic to loop through cards arr, append selected card & pass callback func
+var createBoard = function(){
+	for (var i = 0; i < cards.length; i++){
+		 //create img element
+		 var cardElement = document.createElement("img");
+		 cardElement.setAttribute("src", "images/back.png");
+		 // // set data attribute to be the current index of the card arr
+		 cardElement.setAttribute("data-id", i);
+		 // //add event listener and pass in callback func
+		 cardElement.addEventListener("click", flipCard);
+		 document.getElementById("game-board").appendChild(cardElement);
+	}
+}
+
+createBoard();
+
