@@ -22,8 +22,10 @@ var cards = [
 	]; 
 	
 	var cardsInPlay = []; 
+	var playerScore = 0;
+	var scoreDisplay = document.getElementById("scoreDisplay")
 	
-	
+
 	//checking for a match if cardsInPlay
 	var checkForMatch = function(){
 		//logic to check if 2 cads have been played
@@ -31,12 +33,13 @@ var cards = [
 		//check for match
 			if (cardsInPlay[0] === cardsInPlay[1]) {
 				alert("You found a match!");
+				playerScore++;
+				scoreDisplay.textContent = playerScore;
 			} else {
 				alert("Sorry, try again.");
 			}
 		}
 	}
-	
 	
 	
 	// logic when users flips a card to add to arr & checkForMatch
@@ -77,4 +80,10 @@ var cards = [
 	
 	createBoard();
 	
+//     function randomCards(){
+//     //generate random number & convert to whole num
+// 		var random = Math.floor(Math.random() * cards.length);
+// 	//acess cards arr * pass random generated index
+// 		return cards[random]
+// }
 	
